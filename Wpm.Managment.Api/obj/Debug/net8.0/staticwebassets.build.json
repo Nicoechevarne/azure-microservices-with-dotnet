@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "5nWQcKEvKTNh7HWN7ctbyyDCsxv1c4TUSLWppoRWyag=",
+  "Source": "Wpm.Managment.Api",
+  "BasePath": "_content/Wpm.Managment.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
