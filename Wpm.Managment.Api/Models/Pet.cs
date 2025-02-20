@@ -10,7 +10,7 @@ public class Pet
     public string Name { get; set; }
     public int Age { get; set; }
     public Guid BreedId { get; set; }
-    public Breed Breed { get; set; }
+    public Breed? Breed { get; set; }
 }
 
 public record Breed(Guid Id, string Name);
