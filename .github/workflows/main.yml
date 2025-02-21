@@ -69,4 +69,4 @@ jobs:
             resourceGroup: wpm
             targetPort: 8080
             imageToDeploy: ${{ secrets.ACR_LOGIN_SERVER }}/wpm-clinic-api:${{ env.IMAGE_TAG }}
-            environmentVariables: Logging__LogLevel__Microsoft.EntityFrameworkCore=Debug
+            environmentVariables: Logging__LogLevel__Microsoft.EntityFrameworkCore=Debug Wpm__ManagementUri=http://wpm-management
