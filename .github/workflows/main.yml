@@ -1,31 +1,43 @@
 name: Wpm
 
-on: 
+on:
   push:
     branches:
       - develop
-      
+
 jobs:
-    build:
-      runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-latest
 
-      steps:
-        - uses: actions/checkout@v3
+    steps:
+      - uses: actions/checkout@v3
 
-        - name: Log in
-          uses: azure/login@v1
-          with:
-            creds: ${{ secrets.AZURE_CREDENTIALS }}
-        - name: 'Log in to ACR'
-          uses: azure/docker-login@v1
-          with:
-            login-server: ${{ secrets.ACR_LOGIN_SERVER }}
-            username: ${{ secrets.ACR_USERNAME }}
-            password: ${{ secrets.ACR_PASSWORD }}
+      - name: Log in
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-        - name: 'Building container image'
-          run: |
-              docker buildx build . -f Wpm.Managment.Api/Dockerfile -t ${{ secrets.ACR_LOGIN_SERVER }}/wpm-management-api:${{ env.DATE_TIME }}.${{ github.run_number }}
-        - name: 'Pushing container image'
-          run: |
-            docker push ${{ secrets.ACR_LOGIN_SERVER }}/wpm-management-api:${{ env.DATE_TIME }}.${{ github.run_number }}
+      - name: 'Log in to ACR'
+        uses: azure/docker-login@v1
+        with:
+          login-server: ${{ secrets.ACR_LOGIN_SERVER }}
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
+
+      - name: Set Date and Run Number
+        id: set_date_run
+        run: |
+          # Get the current date in YYYY-MM-DD format
+          CURRENT_DATE=$(date +'%Y-%m-%d')
+          # Set the date and run number to environment variables
+          echo "IMAGE_TAG=${CURRENT_DATE}-${GITHUB_RUN_NUMBER}" >> $GITHUB_ENV
+          echo "CURRENT_DATE=${CURRENT_DATE}" >> $GITHUB_ENV
+          echo "RUN_NUMBER=${GITHUB_RUN_NUMBER}" >> $GITHUB_ENV
+
+      - name: 'Building container image'
+        run: |
+          docker buildx build . -f Wpm.Managment.Api/Dockerfile -t ${{ secrets.ACR_LOGIN_SERVER }}/wpm-management-api:${{ env.IMAGE_TAG }} .
+
+      - name: 'Pushing container image'
+        run: |
+          docker push ${{ secrets.ACR_LOGIN_SERVER }}/wpm-management-api:${{ env.IMAGE_TAG }}
