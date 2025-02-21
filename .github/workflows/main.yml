@@ -29,7 +29,7 @@ jobs:
             # Get the current date in YYYY-MM-DD format
             CURRENT_DATE=$(date +'%Y-%m-%d')
             # Set the date and run number to environment variables
-            echo "IMAGE_TAG=${CURRENT_DATE}-${GITHUB_RUN_NUMBER}" >> $GITHUB_ENV
+            echo "IMAGE_TAG=${CURRENT_DATE}-RN${GITHUB_RUN_NUMBER}" >> $GITHUB_ENV
             echo "CURRENT_DATE=${CURRENT_DATE}" >> $GITHUB_ENV
             echo "RUN_NUMBER=${GITHUB_RUN_NUMBER}" >> $GITHUB_ENV
 
