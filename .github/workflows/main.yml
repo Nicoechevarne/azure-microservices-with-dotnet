@@ -67,6 +67,6 @@ jobs:
             acrPassword: ${{ secrets.ACR_PASSWORD }}
             containerAppName: wpm-clinic
             resourceGroup: wpm
-            targetPort: 8081
+            targetPort: 8080
             imageToDeploy: ${{ secrets.ACR_LOGIN_SERVER }}/wpm-clinic-api:${{ env.IMAGE_TAG }}
             environmentVariables: Logging__LogLevel__Microsoft.EntityFrameworkCore=Debug
