@@ -27,6 +27,7 @@ public class ManagmentDbContext(DbContextOptions<ManagmentDbContext> options) : 
             new Pet() { Id = Guid.NewGuid(), Name = "Chicho", Age = 5, BreedId = breed1Id },
             new Pet() { Id = Guid.NewGuid(), Name = "Carlitos", Age = 8, BreedId = breed2Id },
             new Pet() { Id = Guid.NewGuid(), Name = "Adrian", Age = 10, BreedId = breed3Id },
+            new Pet() { Id = Guid.NewGuid(), Name = "Pablo", Age = 4, BreedId = breed2Id },
         ]);
     }
 }
